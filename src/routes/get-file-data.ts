@@ -1,6 +1,7 @@
 import { RouteMiddleware } from '../types';
 import { NotFound } from '../errors/not-found';
 import * as path from 'path';
+import { getContentType } from '../utility/set-content-type';
 
 export const getFileData: RouteMiddleware<{ bucket: string; path: string }> = async context => {
   const isAdmin = context.state.jwt.scope.indexOf('site.admin') !== -1;
@@ -24,22 +25,8 @@ export const getFileData: RouteMiddleware<{ bucket: string; path: string }> = as
 
   context.body = await storage.getStream(`${rootBucket}/${bucket}/${filePath}`);
 
-  switch (extension) {
-    case '.xml':
-      context.response.set('content-type', 'text/xml');
-      break;
-    case '.txt':
-      context.response.set('content-type', 'text/plain');
-      break;
-    case '.png':
-      context.response.set('content-type', 'image/png');
-      break;
-    case '.jpg':
-    case '.jpeg':
-      context.response.set('content-type', 'image/jpg');
-      break;
-    case '.json':
-      context.response.set('content-type', 'application/json');
-      break;
+  const contentType = getContentType(extension);
+  if (contentType) {
+    context.response.set('content-type', contentType);
   }
 };

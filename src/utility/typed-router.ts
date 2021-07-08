@@ -1,6 +1,8 @@
 import Router from '@koa/router';
 import koaBody from 'koa-body';
 import { RouteMiddleware } from '../types';
+import { fileSizeLimitMb, formFileSizeLimitMb, jsonFileSizeLimitMb, textFileSizeLimitMb } from '../config';
+import { parseLimit } from './parse-limit';
 
 export type RouteWithParams<Props, Body = any> =
   | [string, string, RouteMiddleware<Props, Body>]
@@ -32,6 +34,13 @@ export class TypedRouter<
 
   constructor(routes: MappedRoutes) {
     const routeNames = Object.keys(routes) as Routes[];
+
+    const limit = parseLimit(fileSizeLimitMb, '5mb');
+    const jsonLimit = parseLimit(jsonFileSizeLimitMb, limit);
+    const formLimit = parseLimit(formFileSizeLimitMb, limit);
+    const textLimit = parseLimit(textFileSizeLimitMb, limit);
+
+
     for (const route of routeNames) {
       const [method, path, func, schemaName] = routes[route];
 
@@ -46,9 +55,9 @@ export class TypedRouter<
               text: true,
               includeUnparsed: true,
               json: true,
-              jsonLimit: '5mb',
-              formLimit: '5mb',
-              textLimit: '5mb',
+              jsonLimit,
+              formLimit,
+              textLimit,
             }),
             func
           );
@@ -63,9 +72,9 @@ export class TypedRouter<
               text: true,
               includeUnparsed: true,
               json: true,
-              jsonLimit: '5mb',
-              formLimit: '5mb',
-              textLimit: '5mb',
+              jsonLimit,
+              formLimit,
+              textLimit,
             }),
             func
           );
@@ -80,9 +89,9 @@ export class TypedRouter<
               text: true,
               includeUnparsed: true,
               json: true,
-              jsonLimit: '5mb',
-              formLimit: '5mb',
-              textLimit: '5mb',
+              jsonLimit,
+              formLimit,
+              textLimit,
             }),
             func
           );
