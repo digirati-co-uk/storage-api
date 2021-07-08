@@ -13,6 +13,11 @@ RUN yarn build
 
 FROM node:12-alpine
 
+LABEL org.opencontainers.image.source='https://github.com/digirati-co-uk/storage-api'
+LABEL org.opencontainers.image.documentation='https://docs.madoc.io/'
+LABEL org.opencontainers.image.vendor='Digirati'
+LABEL org.opencontainers.image.licenses='MIT'
+
 WORKDIR /home/node/app
 
 RUN npm install -g pm2@4
