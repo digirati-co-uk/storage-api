@@ -3,6 +3,7 @@
 import { RouteMiddleware } from '../types';
 import { NotFound } from '../errors/not-found';
 import path from 'path';
+import { getContentType } from '../utility/set-content-type';
 
 export const getPublicFile: RouteMiddleware<{ bucket: string; path: string; rootBucket: string }> = async context => {
   const storage = context.storage.disk('local');
@@ -24,19 +25,9 @@ export const getPublicFile: RouteMiddleware<{ bucket: string; path: string; root
 
   context.body = await storage.getStream(`${rootBucket}/${bucket}/${filePath}`);
 
-  switch (extension) {
-    case '.txt':
-      context.response.set('content-type', 'text/plain');
-      break;
-    case '.png':
-      context.response.set('content-type', 'image/png');
-      break;
-    case '.jpg':
-    case '.jpeg':
-      context.response.set('content-type', 'image/jpg');
-      break;
-    case '.json':
-      context.response.set('content-type', 'application/json');
-      break;
+  const contentType = getContentType(extension);
+  if (contentType) {
+    context.response.set('content-type', contentType);
   }
+
 };
