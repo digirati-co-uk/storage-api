@@ -18,7 +18,7 @@
     "sharp": "^0.28.3"
   },
   "devDependencies": {
-    "@fesk/eslint-config-standard": "1.4.0-pr.b6dc2fa3",
+    "@fesk/eslint-config-standard": "1.4.0-pr.6090dce5",
     "@types/koa": "^2.11.0",
     "@types/koa-json": "^2.0.20",
     "@types/koa-logger": "^3.1.1",
