@@ -298,10 +298,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-json@^2.0.18":
-  version "2.0.18"
-  resolved "https://registry.yarnpkg.com/@types/koa-json/-/koa-json-2.0.18.tgz#1be8252bde478a774da42e0cd70aec83ca94a80a"
-  integrity sha512-/I0POp9dkSACFTdrjg84SrdkPiYRiSg5QlYF/vQn8wwMynnB+yjNaxIK9oTeH6NnPzxv9JF+ercO9OdTpWOaIw==
+"@types/koa-json@^2.0.20":
+  version "2.0.20"
+  resolved "https://registry.yarnpkg.com/@types/koa-json/-/koa-json-2.0.20.tgz#6cc67556501f490a6165a2fff0859aff7d316619"
+  integrity sha512-RuQ1Vlpsm/EC5wo2oWCgNnwneixnSQ9aHQAE7nwnbSiCibgfUO2wwSQN6rn8SfF97cRdN9hKAtoc9KSIuiGP6Q==
   dependencies:
     "@types/koa" "*"
 
@@ -377,10 +377,10 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/sharp@^0.27.1":
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.27.1.tgz#26212ceb191b3de654a898a06577869afc200c57"
-  integrity sha512-RbYmyPjDUzi3lI9Qm68I+82I+DNOe/jW5w+EC1FvpT/f2TYXDG6mmPZQQohy98ufq+u6OB6pQkqpcNMDxzVclg==
+"@types/sharp@^0.28.4":
+  version "0.28.4"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.28.4.tgz#7afdcf979069ddc68a915603fdaa412ada93f833"
+  integrity sha512-vfz+RlJU5FgXyyf9w8wc+JwwT8MFI98NZr0272umQegrggAQhTwwb8pKZn0PTtd+j0crXkZDWw5ABG/i6Lu/Lw==
   dependencies:
     "@types/node" "*"
 
@@ -2626,10 +2626,10 @@ node-exceptions@^4.0.1:
   resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-4.0.1.tgz#70425d17a245c3c00709c72f57c4c20b39ef1a4c"
   integrity sha512-KJI+FawYOv74x60H6+zrBPfO2vvp9m0pHZi6SH8BBBuc67Irv11DsqY4Le4EBFq1/T5aXFU3hkLrMgtW7RNXxA==
 
-node-stream-zip@^1.13.2:
-  version "1.13.2"
-  resolved "https://registry.yarnpkg.com/node-stream-zip/-/node-stream-zip-1.13.2.tgz#2fce9d001fa7fda943a906eff239eb83fda124ba"
-  integrity sha512-159NUO3quDIRVSVOQiQ/0VG8NFrGvVyUa+MUUleiOys3NLtrGtNkodqYYTRHU/kiXu/ygHZcNy/tZ4NUCcDUmQ==
+node-stream-zip@^1.13.6:
+  version "1.13.6"
+  resolved "https://registry.yarnpkg.com/node-stream-zip/-/node-stream-zip-1.13.6.tgz#8abdfdbc4bc96ee11e9438d94cc8c93c7df28959"
+  integrity sha512-c7tRSVkLNOHvasWgmZ2d86cDgTWEygnkuuHNOY9c0mR3yLZtQTTrGvMaJ/fPs6+LOJn3240y30l5sjLaXFtcvw==
 
 normalize-package-data@^2.3.2:
   version "2.5.0"
