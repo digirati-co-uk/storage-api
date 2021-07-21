@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@slynova/flydrive": "1.0.2",
-    "@koa/router": "^8.0.6",
+    "@koa/router": "^10.1.0",
     "koa": "^2.13.1",
     "koa-body": "^4.1.1",
     "koa-i18next": "^1.1.1",
