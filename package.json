@@ -15,7 +15,7 @@
     "koa-send": "^5.0.1",
     "memory-cache": "^0.2.0",
     "node-stream-zip": "^1.14.0",
-    "sharp": "^0.28.3"
+    "sharp": "^0.29.0"
   },
   "devDependencies": {
     "@fesk/eslint-config-standard": "1.4.0-pr.b6dc2fa3",
