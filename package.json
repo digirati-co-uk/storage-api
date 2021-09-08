@@ -36,7 +36,7 @@
     "pm2": "^5.1.1",
     "prettier": "^1.19.1",
     "ts-node": "^9.1.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.10"
   },
   "scripts": {
     "start": "pm2 start ecosystem.config.js --watch --no-daemon",
