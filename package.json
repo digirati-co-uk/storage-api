@@ -14,7 +14,7 @@
     "koa-logger": "^3.2.1",
     "koa-send": "^5.0.1",
     "memory-cache": "^0.2.0",
-    "node-stream-zip": "^1.14.0",
+    "node-stream-zip": "^1.15.0",
     "sharp": "^0.29.1"
   },
   "devDependencies": {
