@@ -12,7 +12,7 @@ import {
 async function main() {
   const app = await createApp({
     env: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    localDisk: path.resolve(process.cwd(), '../files'),
+    localDisk: path.resolve(process.cwd(), './files'),
     gatewayHost,
     enableIIIF: true,
     sizeLimits: {
@@ -26,7 +26,7 @@ async function main() {
       disks: {
         local: {
           config: {
-            root: path.resolve(process.cwd(), '../files'),
+            root: path.resolve(process.cwd(), './files'),
           },
           driver: 'local',
         },
