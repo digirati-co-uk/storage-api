@@ -1,7 +1,7 @@
 {
   "name": "@madoc.io/storage-api",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/app.js",
   "typings": "./dist/app.d.ts",
   "files": [
