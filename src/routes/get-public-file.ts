@@ -5,8 +5,8 @@ import { NotFound } from '../errors/not-found';
 import path from 'path';
 import { getContentType } from '../utility/set-content-type';
 
-export const getPublicFile: RouteMiddleware<{ bucket: string; path: string; rootBucket: string }> = async context => {
-  const storage = context.storage.disk('local');
+export const getPublicFile: RouteMiddleware<{ bucket: string; path: string; rootBucket: string }> = async (context) => {
+  const storage = context.storage.disk();
 
   const bucket = context.params.bucket;
   const filePath = context.params.path;
@@ -29,5 +29,4 @@ export const getPublicFile: RouteMiddleware<{ bucket: string; path: string; root
   if (contentType) {
     context.response.set('content-type', contentType);
   }
-
 };

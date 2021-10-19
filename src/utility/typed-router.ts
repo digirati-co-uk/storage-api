@@ -1,7 +1,6 @@
 import Router from '@koa/router';
 import koaBody from 'koa-body';
-import { RouteMiddleware } from '../types';
-import { fileSizeLimitMb, formFileSizeLimitMb, jsonFileSizeLimitMb, textFileSizeLimitMb } from '../config';
+import { AppConfig, RouteMiddleware } from '../types';
 import { parseLimit } from './parse-limit';
 
 export type RouteWithParams<Props, Body = any> =
@@ -32,14 +31,13 @@ export class TypedRouter<
 
   private router = new Router();
 
-  constructor(routes: MappedRoutes) {
+  constructor(routes: MappedRoutes, config: AppConfig) {
     const routeNames = Object.keys(routes) as Routes[];
 
-    const limit = parseLimit(fileSizeLimitMb, '5mb');
-    const jsonLimit = parseLimit(jsonFileSizeLimitMb, limit);
-    const formLimit = parseLimit(formFileSizeLimitMb, limit);
-    const textLimit = parseLimit(textFileSizeLimitMb, limit);
-
+    const limit = parseLimit(config.sizeLimits.file, '5mb');
+    const jsonLimit = parseLimit(config.sizeLimits.json, limit);
+    const formLimit = parseLimit(config.sizeLimits.form, limit);
+    const textLimit = parseLimit(config.sizeLimits.text, limit);
 
     for (const route of routeNames) {
       const [method, path, func, schemaName] = routes[route];

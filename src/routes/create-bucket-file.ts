@@ -4,7 +4,7 @@ import { NotFound } from '../errors/not-found';
 import { getContent } from '../utility/get-content';
 import { RequestError } from '../errors/request-error';
 
-export const createBucketFile: RouteMiddleware<{ bucket: string; path: string }> = async context => {
+export const createBucketFile: RouteMiddleware<{ bucket: string; path: string }> = async (context) => {
   const isAdmin = context.state.jwt.scope.indexOf('site.admin') !== -1;
   const canWrite = isAdmin || context.state.jwt.scope.indexOf('files.write') !== -1;
   const rootBucket = context.state.jwt.context.join('/');
@@ -13,7 +13,7 @@ export const createBucketFile: RouteMiddleware<{ bucket: string; path: string }>
     throw new NotFound();
   }
 
-  const storage = context.storage.disk('local');
+  const storage = context.storage.disk();
 
   const bucket = context.params.bucket;
   const filePath = context.params.path;

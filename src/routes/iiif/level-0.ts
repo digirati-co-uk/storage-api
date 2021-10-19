@@ -1,16 +1,19 @@
 import * as fs from 'fs';
-import { gatewayHost } from '../../config';
 import { NotFound } from '../../errors/not-found';
 import { RouteMiddleware } from '../../types';
 import * as path from 'path';
 import sharp from 'sharp';
 import NodeStreamZip from 'node-stream-zip';
 import cache from 'memory-cache';
-// @ts-ignore
 import mkdirp from 'mkdirp';
 
-export const getLevel0File: RouteMiddleware = async context => {
-  const storage = context.storage.disk('local');
+export const getLevel0File: RouteMiddleware = async (context) => {
+  const storage = context.storage.disk();
+
+  if (!context.enableIIIF) {
+    context.response.status = 404;
+    return;
+  }
 
   const bucket = context.params.bucket;
   const requestedPath = context.params.path;
@@ -48,7 +51,7 @@ export const getLevel0File: RouteMiddleware = async context => {
     return;
   }
 
-  const zipExists = await fs.existsSync(fullZipPath);
+  const zipExists = fs.existsSync(fullZipPath);
 
   if (!zipExists) {
     try {
@@ -79,7 +82,7 @@ export const getLevel0File: RouteMiddleware = async context => {
     }
 
     const newZip = new NodeStreamZip({ file: fullZipPath });
-    await new Promise(resolve => newZip.on('ready', resolve));
+    await new Promise<void>((resolve) => newZip.on('ready', resolve));
     cache.put(key, newZip, 5 * 60 * 1000); // 5 minute cache.
 
     return newZip;
@@ -92,8 +95,8 @@ export const getLevel0File: RouteMiddleware = async context => {
     const info = JSON.parse(zip.entryDataSync(`${name}${iiifPath}`).toString('utf-8'));
 
     // Patch the ID with current gateway host.
-    info['@id'] = `${gatewayHost}${decodeURIComponent(
-      context.routes.url('get-iiif-public-file', { bucket, path: filePath, rootBucket })
+    info['@id'] = `${context.gatewayHost}${decodeURIComponent(
+      `/public/storage/iiif/0/${rootBucket}/${bucket}/${filePath}`
     )}`;
     context.response.body = info;
   } else {
