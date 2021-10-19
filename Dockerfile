@@ -3,13 +3,23 @@ FROM node:12 as build
 WORKDIR /home/node/app
 
 ADD ./package.json /home/node/app/package.json
+ADD ./yarn.lock /home/node/app/yarn.lock
 
 RUN yarn install
 
 COPY ./src /home/node/app/src
 COPY ./tsconfig.json /home/node/app/tsconfig.json
 
-RUN yarn build
+RUN yarn build-es
+
+FROM node:12-alpine as deps
+
+WORKDIR /home/node/app
+
+ADD ./package.json /home/node/app/package.json
+ADD ./yarn.lock /home/node/app/yarn.lock
+
+RUN LDFLAGS='-static-libgcc -static-libstdc++' yarn install --production --no-interactive --frozen-lockfile
 
 FROM node:12-alpine
 
@@ -20,14 +30,11 @@ LABEL org.opencontainers.image.licenses='MIT'
 
 WORKDIR /home/node/app
 
-RUN npm install -g pm2@4
-
-COPY --from=build /home/node/app/lib /home/node/app/lib
-COPY --from=build /home/node/app/package.json /home/node/app/package.json
-COPY --from=build /home/node/app/yarn.lock /home/node/app/yarn.lock
+COPY --from=deps /home/node/app/package.json /home/node/app/package.json
+COPY --from=deps /home/node/app/yarn.lock /home/node/app/yarn.lock
+COPY --from=deps /home/node/app/node_modules /home/node/app/node_modules
+COPY --from=build /home/node/app/dist /home/node/app/dist
 COPY ./ecosystem.config.js /home/node/app/ecosystem.config.js
-
-RUN yarn install --no-dev --no-interactive --frozen-lockfile
 
 ENV SERVER_PORT=3000
 ENV NODE_ENV=production
@@ -36,5 +43,4 @@ EXPOSE 3000
 
 USER node
 
-CMD ["pm2-runtime", "start", "./ecosystem.config.js"]
-
+CMD ["node_modules/.bin/pm2-runtime", "start", "./ecosystem.config.js"]

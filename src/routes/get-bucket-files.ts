@@ -2,7 +2,7 @@
 import { RouteMiddleware } from '../types';
 import { NotFound } from '../errors/not-found';
 
-export const getBucketFiles: RouteMiddleware = async context => {
+export const getBucketFiles: RouteMiddleware = async (context) => {
   const isAdmin = context.state.jwt.scope.indexOf('site.admin') !== -1;
   const rootBucket = context.state.jwt.context.join('/');
 
@@ -10,7 +10,7 @@ export const getBucketFiles: RouteMiddleware = async context => {
     throw new NotFound();
   }
 
-  const storage = context.storage.disk('local');
+  const storage = context.storage.disk();
 
   const bucket = context.params.bucket;
   const prefix = `${rootBucket}/${bucket}`;
