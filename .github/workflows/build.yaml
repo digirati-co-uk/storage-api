@@ -52,4 +52,6 @@ jobs:
 
       - run: yarn install --frozen-lockfile --non-interactive
 
-      - run: yarn run build
+      - run: yarn run build-app
+
+      - run: yarn run types-app
