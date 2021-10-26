@@ -36,10 +36,14 @@ COPY --from=deps /home/node/app/node_modules /home/node/app/node_modules
 COPY --from=build /home/node/app/dist /home/node/app/dist
 COPY ./ecosystem.config.js /home/node/app/ecosystem.config.js
 
+RUN mkdir -p /home/node/app/files && \
+    chown node:node /home/node/app/files
+
 ENV SERVER_PORT=3000
 ENV NODE_ENV=production
 
 EXPOSE 3000
+
 
 USER node
 
