@@ -26,7 +26,7 @@
     "koa-send": "^5.0.1",
     "memory-cache": "^0.2.0",
     "node-stream-zip": "^1.15.0",
-    "esbuild": "^0.13.8",
+    "esbuild": "^0.14.10",
     "@types/koa": "^2.13.4",
     "@types/koa-json": "^2.0.20",
     "@types/koa-logger": "^3.1.2",
